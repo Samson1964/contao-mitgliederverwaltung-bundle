@@ -124,7 +124,7 @@ $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['normen_title_options'] = array
 (
 	'fgm' => 'Großmeister der ICCF (GM)',
 	'sim' => 'Verdienter Internationaler Meister der ICCF (SIM)',
-	'im'  => 'Internationaler Meister der ICCF (IM)',
+	'fim' => 'Internationaler Meister der ICCF (IM)',
 	'ccm' => 'Fernschachmeister der ICCF (CCM)',
 	'lgm' => 'Großmeisterin der ICCF (LGM)',
 	'cce' => 'Fernschachexperte der ICCF (CCE)',

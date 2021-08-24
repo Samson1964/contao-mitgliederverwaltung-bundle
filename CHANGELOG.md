@@ -1,5 +1,10 @@
 # Mitgliederverwaltung Changelog
 
+## Version 0.1.2 (2021-08-24)
+
+* Fix: IM Fernschach fehlte in Normen-Auflistung
+* Add: Beim Import wird bei Update die alte Version gesichert
+
 ## Version 0.1.1 (2021-08-24)
 
 * Add: tl_mitgliederverwaltung.memberInternationalId

@@ -196,6 +196,7 @@ class Import extends \Backend
 								$objUpdate = \Database::getInstance()->prepare("UPDATE tl_mitgliederverwaltung %s WHERE id = ?")
 								                                     ->set($set)
 								                                     ->execute($objResult->id);
+								\Controller::createNewVersion('tl_mitgliederverwaltung', $objResult->id);
 								$update_count++;
 							}
 							else
