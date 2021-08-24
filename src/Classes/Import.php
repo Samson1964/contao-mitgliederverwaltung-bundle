@@ -89,6 +89,8 @@ class Import extends \Backend
 							{
 								case 'mitgliednr':
 									$set['memberId'] = $spalte[$x]; break;
+								case 'mitgliednr_int':
+									$set['memberInternationalId'] = $spalte[$x]; break;
 								case 'vorname':
 									$set['vorname'] = $spalte[$x]; break;
 								case 'nachname':

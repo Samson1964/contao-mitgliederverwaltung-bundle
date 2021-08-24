@@ -33,7 +33,8 @@ $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['email1'] = array('E-Mail 1', 'Ge
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['email2'] = array('E-Mail 2', 'Geben Sie hier die zweite E-Mail-Adresse ein.');
 
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['memberships_legend'] = 'Mitgliedschaften';
-$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['memberId'] = array('Mitgliedsnummer', 'Mitgliedsnummer');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['memberId'] = array('Mitgliedsnummer national', 'Mitgliedsnummer national');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['memberInternationalId'] = array('Mitgliedsnummer international', 'Mitgliedsnummer international');
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['memberships'] = array('Aktuelle und frühere Mitgliedschaften', '');
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['membership_from'] = array('Von', 'Format TT.MM.JJJJ, MM.JJJJ oder JJJJ');
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['membership_to'] = array('Bis', 'Format TT.MM.JJJJ, MM.JJJJ oder JJJJ');

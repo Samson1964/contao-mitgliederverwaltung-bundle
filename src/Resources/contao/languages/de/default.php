@@ -9,7 +9,8 @@ Eindeutiges Kriterium der Zuordnung zu vorhandenen Datensätzen ist die Spalte m
 vorhanden, wird dieser mit den importierten Spalten überschrieben. Nichtimportierte Spalten bleiben erhalten. 
 Folgende Spaltenarten sind möglich:<br><br>
 <b>Spaltenart (1. Zeile) = Wert (2. - x. Zeile)</b><br>
-mitgliednr = Zahl oder Text mit bis zu 20 Stellen<br>
+mitgliednr = nationale Mitgliedsnummer, Zahl oder Text mit bis zu 20 Stellen<br>
+mitgliednr_int = internationale Mitgliedsnummer, Zahl oder Text mit bis zu 20 Stellen<br>
 vorname = Vorname des Mitglieds<br>
 nachname = Nachname des Mitglieds<br>
 strasse = <br>
