@@ -3,7 +3,7 @@
 /**
  * Backend-Modul Übersetzungen
  */
-$GLOBALS['TL_LANG']['MOD']['adressen'] = array('Adressen', 'DSB-Adressverwaltung');
+$GLOBALS['TL_LANG']['MOD']['mitgliederverwaltung'] = array('Mitgliederverwaltung', 'Mitgliederverwaltung');
 
 /**
  * Frontendmodule
