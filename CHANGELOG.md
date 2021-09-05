@@ -1,5 +1,9 @@
 # Mitgliederverwaltung Changelog
 
+## Version 0.1.3 (2021-09-05)
+
+* Add: Frontend-Modul für Darstellung der Titel/Normen
+
 ## Version 0.1.2 (2021-08-24)
 
 * Fix: IM Fernschach fehlte in Normen-Auflistung

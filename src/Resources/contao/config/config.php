@@ -9,11 +9,10 @@ $GLOBALS["BE_MOD"]["accounts"]["mitgliederverwaltung"] = array(
 /**
  * Frontend-Module
  */
-//$GLOBALS['FE_MOD']['adressen'] = array
-//(
-//	'adressen_wertungsreferenten' => 'Schachbulle\ContaoAdressenBundle\Modules\Wertungsreferenten',
-//	'adressen_suche'              => 'Schachbulle\ContaoAdressenBundle\Classes\Suche',
-//);  
+$GLOBALS['FE_MOD']['accounts'] = array
+(
+	'mitgliederverwaltung_titelnormen' => 'Schachbulle\ContaoMitgliederverwaltungBundle\Modules\TitelNormen',
+);  
 
 /**
  * Inhaltselemente
