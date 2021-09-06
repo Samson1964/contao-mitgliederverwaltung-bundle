@@ -25,3 +25,14 @@ aktiv = 1, Mitglied aktivieren - leerlassen, wenn inaktiv (ausgetreten)<br><br>
 PREFIX_title = 1, wenn vorhanden - leerlassen, wenn nicht vorhanden<br>
 PREFIX_date = Datum im Format TT.MM.JJJJ, MM.JJJJ oder JJJJ oder leerlassen<br><br>
 <i>Mögliche Prefixe: gm, im, wgm, fm, wim, cm, wfm, wcm, fgm, sim, fim, ccm, lgm, cce, lim</i>';
+
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['normen_titel'] = array
+(
+	'fgm' => 'GM',
+	'sim' => 'SIM',
+	'fim' => 'IM',
+	'ccm' => 'CCM',
+	'lgm' => 'LGM',
+	'cce' => 'CCE',
+	'lim' => 'LIM',
+);

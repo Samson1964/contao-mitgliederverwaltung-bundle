@@ -1,5 +1,11 @@
 # Mitgliederverwaltung Changelog
 
+## Version 0.2.0 (2021-09-06)
+
+* Change: Datumsangaben für Titel in Subpaletten ausgelagert
+* Change: Modules/TitelNormen umgestellt auf Angabe des Zeitraums direkt im Modul
+* Add: Modules/TitelNormenLast für eine kurze Liste der letzten Titel und Normen
+
 ## Version 0.1.3 (2021-09-05)
 
 * Add: Frontend-Modul für Darstellung der Titel/Normen

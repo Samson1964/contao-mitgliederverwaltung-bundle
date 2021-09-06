@@ -95,14 +95,29 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 	// Paletten
 	'palettes' => array
 	(
-		'__selector__'                => array('death'),
-		'default'                     => '{person_legend},nachname,vorname,titel;{live_legend},birthday,birthplace,sex,death;{adresse_legend:hide},plz,ort,strasse;{telefon_legend:hide},telefon1,telefon2;{email_legend:hide},email1,email2;{memberships_legend},memberId,memberInternationalId,memberships;{iccf_legend},fgm_title,fgm_date,sim_title,sim_date,fim_title,fim_date,ccm_title,ccm_date,lgm_title,lgm_date,cce_title,cce_date,lim_title,lim_date;{fide_legend:hide},gm_title,gm_date,im_title,im_date,wgm_title,wgm_date,fm_title,fm_date,wim_title,wim_date,cm_title,cm_date,wfm_title,wfm_date,wcm_title,wcm_date;{normen_legend},normen;{bank_legend:hide},inhaber,iban,bic;{info_legend:hide},info;{publish_legend},published'
+		'__selector__'                => array('death', 'fgm_title', 'sim_title', 'fim_title', 'ccm_title', 'lgm_title', 'cce_title', 'lim_title', 'gm_title', 'im_title', 'wgm_title', 'fm_title', 'wim_title', 'cm_title', 'wfm_title', 'wcm_title'),
+		'default'                     => '{person_legend},nachname,vorname,titel;{live_legend},birthday,birthplace,sex,death;{adresse_legend:hide},plz,ort,strasse;{telefon_legend:hide},telefon1,telefon2;{email_legend:hide},email1,email2;{memberships_legend},memberId,memberInternationalId,memberships;{iccf_legend},fgm_title,sim_title,fim_title,ccm_title,lgm_title,cce_title,lim_title;{fide_legend:hide},gm_title,im_title,wgm_title,fm_title,wim_title,cm_title,wfm_title,wcm_title;{normen_legend},normen;{bank_legend:hide},inhaber,iban,bic;{info_legend:hide},info;{publish_legend},published'
 	),
 
 	// Subpalettes
 	'subpalettes' => array
 	(
-		'death'                       => 'deathday,deathplace'
+		'death'                       => 'deathday,deathplace',
+		'fgm_title'                   => 'fgm_date',
+		'sim_title'                   => 'sim_date',
+		'fim_title'                   => 'fim_date',
+		'ccm_title'                   => 'ccm_date',
+		'lgm_title'                   => 'lgm_date',
+		'cce_title'                   => 'cce_date',
+		'lim_title'                   => 'lim_date',
+		'gm_title'                    => 'gm_date',
+		'im_title'                    => 'im_date',
+		'wgm_title'                   => 'wgm_date',
+		'fm_title'                    => 'fm_date',
+		'wim_title'                   => 'wim_date',
+		'cm_title'                    => 'cm_date',
+		'wfm_title'                   => 'wfm_date',
+		'wcm_title'                   => 'wcm_date',
 	),
 
 	// Felder
@@ -436,7 +451,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -452,7 +468,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -473,7 +489,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -489,7 +506,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -510,7 +527,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -526,7 +544,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -547,7 +565,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -563,7 +582,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -584,7 +603,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -600,7 +620,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -621,7 +641,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -637,7 +658,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -658,7 +679,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -674,7 +696,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -695,7 +717,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -711,7 +734,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -732,7 +755,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -748,7 +772,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -769,7 +793,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -785,7 +810,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -806,7 +831,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -822,7 +848,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -843,7 +869,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -859,7 +886,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -880,7 +907,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -896,7 +924,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -917,7 +945,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -933,7 +962,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -954,7 +983,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'filter'                  => true,
 			'eval'                    => array
 			(
-				'tl_class'            => 'w50',
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
 				'isBoolean'           => true
 			),
 			'sql'                     => "char(1) NOT NULL default ''"
@@ -970,7 +1000,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 			'eval'                    => array
 			(
 				'maxlength'           => 10,
-				'tl_class'            => 'w50',
+				'tl_class'            => 'w50 clr',
 				'rgxp'                => 'alnum'
 			),
 			'load_callback'           => array
@@ -1006,7 +1036,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 						'eval'                    => array
 						(
 							'includeBlankOption'  => true,
-							'style'               => 'width: 300px',
+							'style'               => 'width: 280px',
 						),
 					),
 					'date' => array
@@ -1020,7 +1050,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 						'eval'                    => array
 						(
 							'maxlength'           => 10,
-							'style'               => 'width: 150px',
+							'style'               => 'width: 130px',
 							'rgxp'                => 'alnum'
 						),
 						'load_callback'           => array
@@ -1039,7 +1069,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 						'inputType'             => 'text',
 						'eval'                  => array
 						(
-							'style'             => 'width: 280px',
+							'style'             => 'width: 240px',
 						),
 					),
 					'url' => array
@@ -1049,7 +1079,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 						'inputType'             => 'text',
 						'eval'                  => array
 						(
-							'style'             => 'width: 280px',
+							'style'             => 'width: 240px',
 						),
 					),
 				)

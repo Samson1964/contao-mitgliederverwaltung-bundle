@@ -9,9 +9,10 @@ $GLOBALS["BE_MOD"]["accounts"]["mitgliederverwaltung"] = array(
 /**
  * Frontend-Module
  */
-$GLOBALS['FE_MOD']['accounts'] = array
+$GLOBALS['FE_MOD']['mitgliederverwaltung'] = array
 (
-	'mitgliederverwaltung_titelnormen' => 'Schachbulle\ContaoMitgliederverwaltungBundle\Modules\TitelNormen',
+	'mitgliederverwaltung_titelnormen'       => 'Schachbulle\ContaoMitgliederverwaltungBundle\Modules\TitelNormen',
+	'mitgliederverwaltung_titelnormen_liste' => 'Schachbulle\ContaoMitgliederverwaltungBundle\Modules\TitelNormenLast',
 );  
 
 /**

@@ -13,14 +13,14 @@
 
 namespace Schachbulle\ContaoMitgliederverwaltungBundle\Modules;
 
-class TitelNormen extends \Module
+class TitelNormenLast extends \Module
 {
 
 	/**
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'mod_titelnormen';
+	protected $strTemplate = 'mod_titelnormen_liste';
 
 	/**
 	 * Display a wildcard in the back end
@@ -32,7 +32,7 @@ class TitelNormen extends \Module
 		{
 			$objTemplate = new \BackendTemplate('be_wildcard');
 
-			$objTemplate->wildcard = '### MITGLIEDERVERWALTUNG - TITEL UND NORMEN ###';
+			$objTemplate->wildcard = '### MITGLIEDERVERWALTUNG - LETZTE TITEL UND NORMEN ###';
 			$objTemplate->title = $this->name;
 			$objTemplate->id = $this->id;
 
@@ -69,35 +69,27 @@ class TitelNormen extends \Module
 						if($norm['date'] >= $mindate && $norm['date'] <= $maxdate)
 						{
 							// Aktuelle Norm gefunden, wurde ein Titel damit erreicht?
-							$title = '_title';
 							if($objMembers->{$norm['title'].'_title'} && $objMembers->{$norm['title'].'_date'} == $norm['date'])
 							{
-								$titel = 'titel';
+								$daten[$norm['date']] = $objMembers->vorname.' '.$objMembers->nachname.' wurde der Titel '.$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['normen_titel'][$norm['title']].' verliehen.';
 							}
 							else
 							{
-								$titel = 'norm';
+								$daten[$norm['date']] = $objMembers->vorname.' '.$objMembers->nachname.' hat eine Norm für den Titel '.$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['normen_titel'][$norm['title']].' erreicht.';
 							}
 
-							// Daten zuweisen
-							$daten[$norm['title']][$titel][] = array
-							(
-								'nachname'    => $objMembers->nachname,
-								'vorname'     => $objMembers->vorname,
-								'name'        => $objMembers->vorname.' '.$objMembers->nachname,
-								'norm'        => $norm['title'],
-								'datum'       => \Schachbulle\ContaoHelperBundle\Classes\Helper::getDate($norm['date']),
-								'turnier'     => $norm['tournament'],
-								'link'        => $norm['url'],
-								'turnierlink' => $norm['url'] ? '<a href="'.$norm['url'].'" target="_blank">'.$norm['tournament'].'</a>' : $norm['tournament'],
-							);
-							
 						}
 					}
 				}
 	
 			}
 		}
+
+		// Daten abwärts sortieren
+		krsort($daten);
+		// Nur die Anzahl der gewünschten Daten zurückgeben
+		$daten = array_splice($daten, 0, $this->mitgliederverwaltung_anzahl);
+
 		$this->Template->daten = $daten;
 
 	}
