@@ -61,41 +61,84 @@ class TitelNormen extends \Module
 		{
 			while($objMembers->next())
 			{
-				$normen = unserialize($objMembers->normen);
+				$normen = unserialize($objMembers->normen); // Normen extrahieren
+				// Normen-Markierung erstellen, wird benötigt um für Titel benutzte Normen zu kennzeichnen
 				if(is_array($normen))
 				{
-					foreach($normen as $norm)
+					for($x = 0; $x < count($normen); $x++)
 					{
-						if($norm['date'] >= $mindate && $norm['date'] <= $maxdate)
-						{
-							// Aktuelle Norm gefunden, wurde ein Titel damit erreicht?
-							$title = '_title';
-							if($objMembers->{$norm['title'].'_title'} && $objMembers->{$norm['title'].'_date'} == $norm['date'])
-							{
-								$titel = 'titel';
-							}
-							else
-							{
-								$titel = 'norm';
-							}
+						$normen[$x]['markiert'] = false;
+					}
+				}
 
-							// Daten zuweisen
-							$daten[$norm['title']][$titel][] = array
+				// Titel der Reihe nach abfragen
+				foreach($GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['normen_titel'] as $titel => $titelname)
+				{
+					// Normen dieses Titels suchen und merken
+					$aktuelleNorm = array(); // Nimmt die Daten der aktuellen Norm auf (Turniername, Link)
+					$aktuellerAbstand = 99999; // Zeitlichen Abstand vom Titeldatum zum Normdatum resetten
+
+					if($objMembers->{$titel.'_title'})
+					{
+						// Titel aktiv, jetzt Normen prüfen, die dazu gehören
+						if(is_array($normen))
+						{
+							for($x = 0; $x < count($normen); $x++)
+							{
+								if($normen[$x]['date'] >= $mindate && $normen[$x]['date'] <= $maxdate && $normen[$x]['title'] == $titel)
+								{
+									// Normdatum innerhalb des Zeitfensters und Normtitel entspricht erreichtem Titel
+									// Zeitlichen Abstand berechnen und Daten neu setzen, wenn Abstand kleiner ist
+									$abstand = $objMembers->{$titel.'_date'} - $normen[$x]['date'];
+									if($abstand < $aktuellerAbstand)
+									{
+										$aktuellerAbstand = $abstand;
+										$aktuelleNorm = array
+										(
+											'turnier'     => $normen[$x]['tournament'],
+											'link'        => $normen[$x]['url'],
+										);
+									}
+									$normen[$x]['markiert'] = true;
+                				}
+                			}
+                			// Alle Titelnormen geprüft, jetzt Daten zuweisen
+							$daten[$titel]['titel'][] = array
 							(
 								'nachname'    => $objMembers->nachname,
 								'vorname'     => $objMembers->vorname,
 								'name'        => $objMembers->vorname.' '.$objMembers->nachname,
-								'norm'        => $norm['title'],
-								'datum'       => \Schachbulle\ContaoHelperBundle\Classes\Helper::getDate($norm['date']),
-								'turnier'     => $norm['tournament'],
-								'link'        => $norm['url'],
-								'turnierlink' => $norm['url'] ? '<a href="'.$norm['url'].'" target="_blank">'.$norm['tournament'].'</a>' : $norm['tournament'],
+								'norm'        => $titel,
+								'datum'       => \Schachbulle\ContaoHelperBundle\Classes\Helper::getDate($objMembers->{$titel.'_date'}),
+								'turnier'     => $aktuelleNorm['turnier'],
+								'link'        => $aktuelleNorm['link'],
+								'turnierlink' => $aktuelleNorm['link'] ? '<a href="'.$aktuelleNorm['link'].'" target="_blank">'.$aktuelleNorm['turnier'].'</a>' : $aktuelleNorm['turnier'],
 							);
-							
+                		}
+					}
+				}
+				
+				// Restliche (nicht markierte) Normen eintragen
+				if(is_array($normen))
+				{
+					for($x = 0; $x < count($normen); $x++)
+					{
+						if(!$normen[$x]['markiert'])
+						{
+							$daten[$normen[$x]['title']]['norm'][] = array
+							(
+								'nachname'    => $objMembers->nachname,
+								'vorname'     => $objMembers->vorname,
+								'name'        => $objMembers->vorname.' '.$objMembers->nachname,
+								'norm'        => $normen[$x]['title'],
+								'datum'       => \Schachbulle\ContaoHelperBundle\Classes\Helper::getDate($normen[$x]['date']),
+								'turnier'     => $normen[$x]['tournament'],
+								'link'        => $normen[$x]['url'],
+								'turnierlink' => $normen[$x]['url'] ? '<a href="'.$normen[$x]['url'].'" target="_blank">'.$normen[$x]['tournament'].'</a>' : $normen[$x]['tournament'],
+							);
 						}
 					}
 				}
-	
 			}
 		}
 		$this->Template->daten = $daten;

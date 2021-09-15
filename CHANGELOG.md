@@ -1,5 +1,9 @@
 # Mitgliederverwaltung Changelog
 
+## Version 0.2.1 (2021-09-15)
+
+* Fix: Modules/TitelNormen benötigt jetzt nicht mehr Titeldatum = Normdatum
+
 ## Version 0.2.0 (2021-09-06)
 
 * Change: Datumsangaben für Titel in Subpaletten ausgelagert
