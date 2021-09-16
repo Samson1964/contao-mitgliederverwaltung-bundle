@@ -1,5 +1,11 @@
 # Mitgliederverwaltung Changelog
 
+## Version 0.3.0 (2021-09-17)
+
+* Fix: Modules/TitelNormen umgebaut, da viele Fehler in Version 0.2.1
+* Fix: Modules/TitelNormenLast entsprechend Modules/TitelNormen
+* Add: Ausgabe des Datums in Modules/TitelNormenLast
+
 ## Version 0.2.1 (2021-09-15)
 
 * Fix: Modules/TitelNormen benötigt jetzt nicht mehr Titeldatum = Normdatum
