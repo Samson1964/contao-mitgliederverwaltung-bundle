@@ -146,14 +146,16 @@ class TitelNormenLast extends \Module
 		// Normen sortieren nach Datum absteigend
 		$normen = \Schachbulle\ContaoHelperBundle\Classes\Helper::sortArrayByFields($neu, array('datum' => SORT_DESC));
 
+		$count = 1;
 		// Titel übertragen in Ausgabe
 		for($x = 0; $x < count($titel); $x++)
 		{
 			// Nur Titel innerhalb des Zeitfensters
 			if($titel[$x]['datum'] >= $mindate && $titel[$x]['datum'] <= $maxdate)
 			{
-				$daten[$titel[$x]['datum']] = \Schachbulle\ContaoHelperBundle\Classes\Helper::getDate($titel[$x]['datum']).': '.$titel[$x]['vorname'].' '.$titel[$x]['nachname'].' wurde der Titel '.$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['normen_titel'][$titel[$x]['titel']].' verliehen.';
- 			}
+				$daten[$titel[$x]['datum'].'_'.$count] = \Schachbulle\ContaoHelperBundle\Classes\Helper::getDate($titel[$x]['datum']).': '.$titel[$x]['vorname'].' '.$titel[$x]['nachname'].' wurde der Titel '.$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['normen_titel'][$titel[$x]['titel']].' verliehen.';
+				$count++;
+			}
 		}
 		
 		// Normen übertragen in Ausgabe
@@ -162,7 +164,8 @@ class TitelNormenLast extends \Module
 			// Nur Normen innerhalb des Zeitfensters
 			if($normen[$x]['datum'] >= $mindate && $normen[$x]['datum'] <= $maxdate)
 			{
-				$daten[$normen[$x]['datum']] = \Schachbulle\ContaoHelperBundle\Classes\Helper::getDate($normen[$x]['datum']).': '.$normen[$x]['vorname'].' '.$normen[$x]['nachname'].' hat eine Norm für den Titel '.$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['normen_titel'][$normen[$x]['titel']].' erreicht.';
+				$daten[$normen[$x]['datum'].'_'.$count] = \Schachbulle\ContaoHelperBundle\Classes\Helper::getDate($normen[$x]['datum']).': '.$normen[$x]['vorname'].' '.$normen[$x]['nachname'].' hat eine Norm für den Titel '.$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['normen_titel'][$normen[$x]['titel']].' erreicht.';
+				$count++;
  			}
 		}
 

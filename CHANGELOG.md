@@ -1,5 +1,9 @@
 # Mitgliederverwaltung Changelog
 
+## Version 0.3.1 (2021-09-18)
+
+* Fix: Modules/TitelNormenLast - Index $daten-Array wurde überschrieben und Spieler fehlten
+
 ## Version 0.3.0 (2021-09-17)
 
 * Fix: Modules/TitelNormen umgebaut, da viele Fehler in Version 0.2.1
