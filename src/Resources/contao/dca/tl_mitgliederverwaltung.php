@@ -95,8 +95,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 	// Paletten
 	'palettes' => array
 	(
-		'__selector__'                => array('death', 'fgm_title', 'sim_title', 'fim_title', 'ccm_title', 'lgm_title', 'cce_title', 'lim_title', 'gm_title', 'im_title', 'wgm_title', 'fm_title', 'wim_title', 'cm_title', 'wfm_title', 'wcm_title'),
-		'default'                     => '{person_legend},nachname,vorname,titel;{live_legend},birthday,birthplace,sex,death;{adresse_legend:hide},plz,ort,strasse;{telefon_legend:hide},telefon1,telefon2;{email_legend:hide},email1,email2;{memberships_legend},memberId,memberInternationalId,memberships;{iccf_legend},fgm_title,sim_title,fim_title,ccm_title,lgm_title,cce_title,lim_title;{fide_legend:hide},gm_title,im_title,wgm_title,fm_title,wim_title,cm_title,wfm_title,wcm_title;{normen_legend},normen;{bank_legend:hide},inhaber,iban,bic;{info_legend:hide},info;{publish_legend},published'
+		'__selector__'                => array('death', 'fgm_title', 'sim_title', 'fim_title', 'ccm_title', 'lgm_title', 'cce_title', 'lim_title', 'gm_title', 'im_title', 'wgm_title', 'fm_title', 'wim_title', 'cm_title', 'wfm_title', 'wcm_title', 'honor_25', 'honor_40', 'honor_50', 'honor_60', 'honor_70', 'honor_president', 'honor_member'),
+		'default'                     => '{person_legend},nachname,vorname,titel;{live_legend},birthday,birthplace,sex,death;{adresse_legend:hide},plz,ort,strasse;{telefon_legend:hide},telefon1,telefon2;{email_legend:hide},email1,email2;{memberships_legend},memberId,memberInternationalId,memberships;{iccf_legend},fgm_title,sim_title,fim_title,ccm_title,lgm_title,cce_title,lim_title;{fide_legend:hide},gm_title,im_title,wgm_title,fm_title,wim_title,cm_title,wfm_title,wcm_title;{normen_legend},normen;{honors_legend},honor_25,honor_40,honor_50,honor_60,honor_70,honor_president,honor_member;{bank_legend:hide},inhaber,iban,bic;{info_legend:hide},info;{publish_legend},published'
 	),
 
 	// Subpalettes
@@ -118,6 +118,13 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 		'cm_title'                    => 'cm_date',
 		'wfm_title'                   => 'wfm_date',
 		'wcm_title'                   => 'wcm_date',
+		'honor_25'                    => 'honor_25_date',
+		'honor_40'                    => 'honor_40_date',
+		'honor_50'                    => 'honor_50_date',
+		'honor_60'                    => 'honor_60_date',
+		'honor_70'                    => 'honor_70_date',
+		'honor_president'             => 'honor_president_date',
+		'honor_member'                => 'honor_member_date',
 	),
 
 	// Felder
@@ -992,6 +999,272 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 		'wcm_date' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['wcm_date'],
+			'exclude'                 => true,
+			'search'                  => false,
+			'sorting'                 => false,
+			'flag'                    => 11,
+			'inputType'               => 'text',
+			'eval'                    => array
+			(
+				'maxlength'           => 10,
+				'tl_class'            => 'w50 clr',
+				'rgxp'                => 'alnum'
+			),
+			'load_callback'           => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'getDate')
+			),
+			'save_callback' => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'putDate')
+			),
+			'sql'                     => "int(8) unsigned NOT NULL default '0'"
+		),
+		'honor_25' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_25'],
+			'inputType'               => 'checkbox',
+			'default'                 => '',
+			'filter'                  => true,
+			'eval'                    => array
+			(
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
+				'isBoolean'           => true
+			),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'honor_25_date' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_25_date'],
+			'exclude'                 => true,
+			'search'                  => false,
+			'sorting'                 => false,
+			'flag'                    => 11,
+			'inputType'               => 'text',
+			'eval'                    => array
+			(
+				'maxlength'           => 10,
+				'tl_class'            => 'w50 clr',
+				'rgxp'                => 'alnum'
+			),
+			'load_callback'           => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'getDate')
+			),
+			'save_callback' => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'putDate')
+			),
+			'sql'                     => "int(8) unsigned NOT NULL default '0'"
+		),
+		'honor_40' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_40'],
+			'inputType'               => 'checkbox',
+			'default'                 => '',
+			'filter'                  => true,
+			'eval'                    => array
+			(
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
+				'isBoolean'           => true
+			),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'honor_40_date' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_40_date'],
+			'exclude'                 => true,
+			'search'                  => false,
+			'sorting'                 => false,
+			'flag'                    => 11,
+			'inputType'               => 'text',
+			'eval'                    => array
+			(
+				'maxlength'           => 10,
+				'tl_class'            => 'w50 clr',
+				'rgxp'                => 'alnum'
+			),
+			'load_callback'           => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'getDate')
+			),
+			'save_callback' => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'putDate')
+			),
+			'sql'                     => "int(8) unsigned NOT NULL default '0'"
+		),
+		'honor_50' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_50'],
+			'inputType'               => 'checkbox',
+			'default'                 => '',
+			'filter'                  => true,
+			'eval'                    => array
+			(
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
+				'isBoolean'           => true
+			),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'honor_50_date' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_50_date'],
+			'exclude'                 => true,
+			'search'                  => false,
+			'sorting'                 => false,
+			'flag'                    => 11,
+			'inputType'               => 'text',
+			'eval'                    => array
+			(
+				'maxlength'           => 10,
+				'tl_class'            => 'w50 clr',
+				'rgxp'                => 'alnum'
+			),
+			'load_callback'           => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'getDate')
+			),
+			'save_callback' => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'putDate')
+			),
+			'sql'                     => "int(8) unsigned NOT NULL default '0'"
+		),
+		'honor_60' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_60'],
+			'inputType'               => 'checkbox',
+			'default'                 => '',
+			'filter'                  => true,
+			'eval'                    => array
+			(
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
+				'isBoolean'           => true
+			),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'honor_60_date' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_60_date'],
+			'exclude'                 => true,
+			'search'                  => false,
+			'sorting'                 => false,
+			'flag'                    => 11,
+			'inputType'               => 'text',
+			'eval'                    => array
+			(
+				'maxlength'           => 10,
+				'tl_class'            => 'w50 clr',
+				'rgxp'                => 'alnum'
+			),
+			'load_callback'           => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'getDate')
+			),
+			'save_callback' => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'putDate')
+			),
+			'sql'                     => "int(8) unsigned NOT NULL default '0'"
+		),
+		'honor_70' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_70'],
+			'inputType'               => 'checkbox',
+			'default'                 => '',
+			'filter'                  => true,
+			'eval'                    => array
+			(
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
+				'isBoolean'           => true
+			),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'honor_70_date' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_70_date'],
+			'exclude'                 => true,
+			'search'                  => false,
+			'sorting'                 => false,
+			'flag'                    => 11,
+			'inputType'               => 'text',
+			'eval'                    => array
+			(
+				'maxlength'           => 10,
+				'tl_class'            => 'w50 clr',
+				'rgxp'                => 'alnum'
+			),
+			'load_callback'           => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'getDate')
+			),
+			'save_callback' => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'putDate')
+			),
+			'sql'                     => "int(8) unsigned NOT NULL default '0'"
+		),
+		'honor_president' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_president'],
+			'inputType'               => 'checkbox',
+			'default'                 => '',
+			'filter'                  => true,
+			'eval'                    => array
+			(
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
+				'isBoolean'           => true
+			),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'honor_president_date' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_president_date'],
+			'exclude'                 => true,
+			'search'                  => false,
+			'sorting'                 => false,
+			'flag'                    => 11,
+			'inputType'               => 'text',
+			'eval'                    => array
+			(
+				'maxlength'           => 10,
+				'tl_class'            => 'w50 clr',
+				'rgxp'                => 'alnum'
+			),
+			'load_callback'           => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'getDate')
+			),
+			'save_callback' => array
+			(
+				array('\Schachbulle\ContaoHelperBundle\Classes\Helper', 'putDate')
+			),
+			'sql'                     => "int(8) unsigned NOT NULL default '0'"
+		),
+		'honor_member' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_member'],
+			'inputType'               => 'checkbox',
+			'default'                 => '',
+			'filter'                  => true,
+			'eval'                    => array
+			(
+				'submitOnChange'      => true,
+				'tl_class'            => 'w50 clr',
+				'isBoolean'           => true
+			),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+		'honor_member_date' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_member_date'],
 			'exclude'                 => true,
 			'search'                  => false,
 			'sorting'                 => false,

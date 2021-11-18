@@ -81,6 +81,22 @@ $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['normen_date'] = array('Datum', '
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['normen_tournament'] = array('Turnier', 'Name des Turniers, in dem die Norm erzielt wurde');
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['normen_url'] = array('URL', 'Link zum Turnier, in dem die Norm erzeilt wurde');
 
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honors_legend'] = 'Ehrungen';
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_25'] = array('25 Jahre Mitgliedschaft (Silberne Ehrennadel)', '25 Jahre Mitglied im Deutschen Fernschachbund');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_25_date'] = array('Datum', 'Verleihungsdatum der Ehrung im Format TT.MM.JJJJ, MM.JJJJ oder JJJJ.');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_40'] = array('40 Jahre Mitgliedschaft (Goldene Ehrennadel)', '40 Jahre Mitglied im Deutschen Fernschachbund');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_40_date'] = array('Datum', 'Verleihungsdatum der Ehrung im Format TT.MM.JJJJ, MM.JJJJ oder JJJJ.');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_50'] = array('50 Jahre Mitgliedschaft (Ehrenmedaille)', '50 Jahre Mitglied im Deutschen Fernschachbund');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_50_date'] = array('Datum', 'Verleihungsdatum der Ehrung im Format TT.MM.JJJJ, MM.JJJJ oder JJJJ.');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_60'] = array('60 Jahre Mitgliedschaft (Stele Platin 60)', '60 Jahre Mitglied im Deutschen Fernschachbund');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_60_date'] = array('Datum', 'Verleihungsdatum der Ehrung im Format TT.MM.JJJJ, MM.JJJJ oder JJJJ.');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_70'] = array('70 Jahre Mitgliedschaft (Stele Platin 70)', '70 Jahre Mitglied im Deutschen Fernschachbund');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_70_date'] = array('Datum', 'Verleihungsdatum der Ehrung im Format TT.MM.JJJJ, MM.JJJJ oder JJJJ.');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_president'] = array('Ehrenpräsident', 'Ehrenpräsident des Deutschen Fernschachbundes');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_president_date'] = array('Datum', 'Verleihungsdatum der Ehrung im Format TT.MM.JJJJ, MM.JJJJ oder JJJJ.');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_member'] = array('Ehrenmitglied', 'Ehrenmitglied des Deutschen Fernschachbundes');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['honor_member_date'] = array('Datum', 'Verleihungsdatum der Ehrung im Format TT.MM.JJJJ, MM.JJJJ oder JJJJ.');
+
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['bank_legend'] = 'Bankverbindung';
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['inhaber'] = array('Kontoinhaber', 'Name des Kontoinhabers');
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['iban'] = array('IBAN', 'IBAN');

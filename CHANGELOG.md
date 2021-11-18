@@ -1,5 +1,9 @@
 # Mitgliederverwaltung Changelog
 
+## Version 0.3.2 (2021-11-18)
+
+* Add: Ehrungen 25, 40, 50, 60, 70 Jahre, Ehrenpräsident und Ehrenmitglied hinzugefügt
+
 ## Version 0.3.1 (2021-09-18)
 
 * Fix: Modules/TitelNormenLast - Index $daten-Array wurde überschrieben und Spieler fehlten
