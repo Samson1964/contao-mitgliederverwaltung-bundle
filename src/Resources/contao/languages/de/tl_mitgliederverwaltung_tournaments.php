@@ -3,9 +3,14 @@
 /**
  * Backend-Modul: Übersetzungen im Eingabeformular
  */
-$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['person_legend'] = 'Name';
-$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['titel'] = array('Titel', 'Geben Sie hier den Titel ein, z.B. Dr. oder Prof.Dr.');
-$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['date'] = array('Datum', 'Startdatum im Format TT.MM.JJJJ');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['tournament_legend'] = 'Turnier';
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['titel'] = array('Titel', 'Geben Sie hier den Turniertitel ein');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['date'] = array('Startdatum', 'Startdatum im Format TT.MM.JJJJ');
+
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['applications_legend'] = 'Bewerbungen';
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['name'] = array('Spieler', 'Name des Spielers');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['applicationDate'] = array('Bewerbung am', 'Datum der Bewerbung');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['promiseDate'] = array('Zusage am', 'Datum der Zusage');
 
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['publish_legend'] = 'Aktivieren';
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['published'] = array('Aktiv', 'Aktivieren oder deaktivieren Sie hier das Turnier');
@@ -26,3 +31,10 @@ $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['show'] = array('Turn
  */
 
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['members'] = array('Mitglieder', 'Mitglieder verwalten');
+
+/**
+ * Sonstige Felder
+ */
+
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['bewerbungen'] = array('Bewerbungen', 'Anzahl der Bewerbungen');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['zusagen'] = array('Zusagen', 'Anzahl der Zusagen');

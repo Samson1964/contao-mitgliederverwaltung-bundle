@@ -1,5 +1,11 @@
 # Mitgliederverwaltung Changelog
 
+## Version 1.0.1 (2022-01-13)
+
+* Add: Ausgabe der Anzahl von Bewerbungen und Zusagen in der Turnierübersicht
+* Add: Ausgabe der namentlichen Bewerbungen in der Turnierbearbeitung
+* Change: published standardmäßig auf 1 gesetzt in der Turnierverwaltung
+
 ## Version 1.0.0 (2022-01-13)
 
 * Add: Turnierverwaltung für die Bearbeitung von Bewerbungen und Zusagen

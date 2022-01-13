@@ -103,7 +103,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_applications'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => 'tournament,applicationDate,promiseDate;{publish_legend},published'
+		'default'                     => '{application_legend},tournament,applicationDate;{promise_legend},promiseDate,comment;{publish_legend},published'
 	),
 
 	// Fields
@@ -169,13 +169,22 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_applications'] = array
 			),
 			'sql'                     => "int(10) unsigned NOT NULL default 0"
 		),
+		'comment' => array
+		(
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'textarea',
+			'eval'                    => array('tl_class'=>'w50', 'rows'=>5),
+			'sql'                     => "text NULL"
+		),
 		'published' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['published'],
 			'inputType'               => 'checkbox',
+			'default'                 => 1,
 			'filter'                  => true,
 			'eval'                    => array('tl_class' => 'w50','isBoolean' => true),
-			'sql'                     => "char(1) NOT NULL default ''"
+			'sql'                     => "char(1) NOT NULL default '1'"
 		),
 	)
 );

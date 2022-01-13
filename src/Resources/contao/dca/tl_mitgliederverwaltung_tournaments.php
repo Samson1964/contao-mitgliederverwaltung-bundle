@@ -34,9 +34,10 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_tournaments'] = array
 		'label' => array
 		(
 			// Das Feld aktiv wird vom label_callback überschrieben
-			'fields'                  => array('titel', 'date'),
+			'fields'                  => array('titel', 'date', 'bewerbungen', 'zusagen'),
 			'showColumns'             => true,
 			'format'                  => '%s',
+			'label_callback'          => array('tl_mitgliederverwaltung_tournaments', 'viewLabels'),
 		),
 		'global_operations' => array
 		(
@@ -96,7 +97,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_tournaments'] = array
 	// Paletten
 	'palettes' => array
 	(
-		'default'                     => '{tournament_legend},titel,date;{publish_legend},published'
+		'default'                     => '{tournament_legend},titel,date;{applications_legend},applications;{publish_legend},published'
 	),
 
 	// Felder
@@ -146,19 +147,33 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_tournaments'] = array
 			),
 			'sql'                     => "int(10) unsigned NOT NULL default 0"
 		),
+		// Gibt die Liste der Bewerbungen aus
+		'applications' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['applications'],
+			'input_field_callback'    => array('tl_mitgliederverwaltung_tournaments', 'getApplications'),
+		),
+		'bewerbungen' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['bewerbungen'],
+		),
+		'zusagen' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['zusagen'],
+		),
 		'published' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['published'],
 			'exclude'                 => true,
 			'filter'                  => true,
-			'default'                 => true,
+			'default'                 => 1,
 			'inputType'               => 'checkbox',
 			'eval'                    => array
 			(
 				'doNotCopy'           => true,
 				'isBoolean'           => true,
 			),
-			'sql'                     => "char(1) NOT NULL default ''"
+			'sql'                     => "char(1) NOT NULL default '1'"
 		),
 	)
 );
@@ -168,6 +183,76 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_tournaments'] = array
  */
 class tl_mitgliederverwaltung_tournaments extends Backend
 {
+
+	var $bewerbungen_zusagen =array();
+	
+	/**
+	 * Import the back end user object
+	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->import('BackendUser', 'User');
+
+		// Bewerbungen und Zusagen aller Turniere zählen
+		$objRecord = \Database::getInstance()->prepare("SELECT * FROM tl_mitgliederverwaltung_applications")
+		                                     ->execute();
+		if($objRecord->numRows)
+		{
+			while($objRecord->next())
+			{
+				if($objRecord->applicationDate) $this->bewerbungen_zusagen[$objRecord->tournament][0]++; 
+				if($objRecord->promiseDate) $this->bewerbungen_zusagen[$objRecord->tournament][1]++; 
+			}
+		}
+
+	}
+
+	public function getApplications(DataContainer $dc)
+	{
+
+		// Link-Prefixe generieren, ab C4 ist das ein symbolischer Link zu "contao"
+		if(version_compare(VERSION, '4.0', '>='))
+		{
+			$linkprefix = \System::getContainer()->get('router')->generate('contao_backend');
+			$imageEdit = \Image::getHtml('edit.svg', 'Bewerbung des Mitglieds bearbeiten');
+		}
+		else
+		{
+			$linkprefix = 'contao/main.php';
+			$imageEdit = \Image::getHtml('edit.gif', 'Bewerbung des Mitglieds bearbeiten');
+		}
+
+		$turnier_id = $dc->activeRecord->id;
+
+		$objApplications = $this->Database->prepare("SELECT m.id AS mitglied_id, m.nachname AS nachname, m.vorname AS vorname, a.id AS bewerbung_id, a.applicationDate AS bewerbungsdatum, a.promiseDate AS zusagedatum FROM tl_mitgliederverwaltung_applications AS a LEFT JOIN tl_mitgliederverwaltung AS m ON a.pid = m.id WHERE a.tournament=?")
+		                                  ->execute($turnier_id);
+		$ausgabe = '<div class="long widget">'; // Wichtig damit das Auf- und Zuklappen funktioniert
+		$ausgabe .= '<table class="tl_listing showColumns">';
+		$ausgabe .= '<tbody><tr>';
+		$ausgabe .= '<th class="tl_folder_tlist">'.$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['name'][0].'</th>';
+		$ausgabe .= '<th class="tl_folder_tlist">'.$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['applicationDate'][0].'</th>';
+		$ausgabe .= '<th class="tl_folder_tlist">'.$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['promiseDate'][0].'</th>';
+		$ausgabe .= '<th class="tl_folder_tlist tl_right_nowrap">&nbsp;</th>';
+		$ausgabe .= '</tr>';
+		$oddeven = 'odd';
+		while($objApplications->next())
+		{
+			$oddeven = $oddeven == 'odd' ? 'even' : 'odd';
+			$ausgabe .= '<tr class="'.$oddeven.'" onmouseover="Theme.hoverRow(this,1)" onmouseout="Theme.hoverRow(this,0)">';
+			$ausgabe .= '<td class="tl_file_list">'.$objApplications->nachname.','.$objApplications->vorname.'</td>';
+			$ausgabe .= '<td class="tl_file_list">'.($objApplications->bewerbungsdatum ? date('d.m.Y', $objApplications->bewerbungsdatum) : '-').'</td>';
+			$ausgabe .= '<td class="tl_file_list">'.($objApplications->zusagedatum ? date('d.m.Y', $objApplications->zusagedatum) : '-').'</td>';
+			$ausgabe .= '<td class="tl_file_list tl_right_nowrap">';
+			$ausgabe .= '<a href="'.$linkprefix.'?do=mitgliederverwaltung&amp;table=tl_mitgliederverwaltung_applications&amp;act=edit&amp;id='.$objApplications->bewerbung_id.'&amp;popup=1&amp;rt='.REQUEST_TOKEN.'" onclick="Backend.openModalIframe({\'width\':768,\'title\':\'Eintrag in Bewerbungen bearbeiten\',\'url\':this.href});return false">'.$imageEdit.'</a>';
+			$ausgabe .= '</td>';
+			$ausgabe .= '</tr>';
+		}
+		$ausgabe .= '</tbody></table>';
+		$ausgabe .= '</div>';
+		return $ausgabe;
+
+	}
 
 	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
 	{
@@ -227,7 +312,7 @@ class tl_mitgliederverwaltung_tournaments extends Backend
 		
 		// Update the database
 		$this->Database->prepare("UPDATE tl_mitgliederverwaltung_tournaments SET tstamp=". time() .", published='" . ($blnPublished ? '' : '1') . "' WHERE id=?")
-					   ->execute($intId);
+		               ->execute($intId);
 		$this->createNewVersion('tl_mitgliederverwaltung_tournaments', $intId);
 	}
 
@@ -241,6 +326,26 @@ class tl_mitgliederverwaltung_tournaments extends Backend
 	public function loadDate($value)
 	{
 		return strtotime(date('Y-m-d', $value) . ' 00:00:00');
+	}
+
+	/**
+	 * Zeigt zu einem Datensatz die Anzahl der Bewerbungen/Zusagen an
+	 *
+	 * @param array                $row
+	 * @param string               $label
+	 * @param Contao\DataContainer $dc
+	 * @param array                $args        Index 6 ist das Feld lizenzen
+	 *
+	 * @return array
+	 */
+	public function viewLabels($row, $label, Contao\DataContainer $dc, $args)
+	{
+
+		$args[2] = $this->bewerbungen_zusagen[$row['id']][0];
+		$args[3] = $this->bewerbungen_zusagen[$row['id']][1];
+
+		// Datensatz komplett zurückgeben
+		return $args;
 	}
 
 }
