@@ -119,11 +119,14 @@ $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['delete'] = array('Mitglied lösc
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['toggle'] = array('Mitglied aktivieren/deaktivieren', 'Mitglied %s aktivieren/deaktivieren');
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['show'] = array('Mitgliedsdetails anzeigen', 'Details des Mitglieds %s anzeigen');
 
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['applications'] = array('Turniere bearbeiten', 'Bewerbungen und Zusagen für Turniere des Mitglieds %s bearbeiten');
+
 /**
  * Buttons für globale Operationen
  */
 
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['import'] = array('Import', 'Neue Mitglieder importieren bzw. alte Mitglieder ergänzen');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['tournaments'] = array('Turniere', 'Turniere verwalten');
 
 
 /**

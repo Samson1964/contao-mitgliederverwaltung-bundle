@@ -1,5 +1,9 @@
 # Mitgliederverwaltung Changelog
 
+## Version 1.0.0 (2022-01-13)
+
+* Add: Turnierverwaltung für die Bearbeitung von Bewerbungen und Zusagen
+
 ## Version 0.3.2 (2021-11-18)
 
 * Add: Ehrungen 25, 40, 50, 60, 70 Jahre, Ehrenpräsident und Ehrenmitglied hinzugefügt

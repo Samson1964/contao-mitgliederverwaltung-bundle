@@ -10,6 +10,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 	'config' => array
 	(
 		'dataContainer'               => 'Table',
+		'ctable'                      => array('tl_mitgliederverwaltung_applications'),
 		'enableVersioning'            => true,
 		'sql' => array
 		(
@@ -46,6 +47,12 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 				'href'                => 'key=import',
 				'icon'                => 'bundles/contaomitgliederverwaltung/images/import.png'
 			),
+			'tournaments' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['tournaments'],
+				'href'                => 'table=tl_mitgliederverwaltung_tournaments',
+				'icon'                => 'bundles/contaomitgliederverwaltung/images/tournament.png'
+			),
 			'all' => array
 			(
 				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
@@ -74,6 +81,12 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung'] = array
 				'href'                => 'act=delete',
 				'icon'                => 'delete.gif',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
+			),
+			'applications' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['applications'],
+				'href'                => 'table=tl_mitgliederverwaltung_applications',
+				'icon'                => 'bundles/contaomitgliederverwaltung/images/application.png'
 			),
 			'toggle' => array
 			(

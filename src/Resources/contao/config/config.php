@@ -1,8 +1,8 @@
 <?php
 
-$GLOBALS["BE_MOD"]["accounts"]["mitgliederverwaltung"] = array(
-	"tables"         => array('tl_mitgliederverwaltung'),
-	"icon"           => "bundles/contaomitgliederverwaltung/images/icon.png",
+$GLOBALS['BE_MOD']['accounts']['mitgliederverwaltung'] = array(
+	'tables'         => array('tl_mitgliederverwaltung', 'tl_mitgliederverwaltung_applications', 'tl_mitgliederverwaltung_tournaments'),
+	'icon'           => 'bundles/contaomitgliederverwaltung/images/members.png',
 	'import'         => array('Schachbulle\ContaoMitgliederverwaltungBundle\Classes\Import', 'run'),
 );
 
