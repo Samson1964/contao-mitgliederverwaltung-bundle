@@ -1,5 +1,11 @@
 # Mitgliederverwaltung Changelog
 
+## Version 1.0.2 (2022-01-17)
+
+* Add: tl_mitgliederverwaltung_applications.state = Optionsfeld: zugesagt, abgesagt, unklar
+* Change: Ausgabe der Bewerbungen farblich angepaßt an die 3 Zustände (zugesagt, abgesagt, unklar)
+* Add: Auflistung der Bewerbungen in der Turnierbearbeitung farblich markieren
+
 ## Version 1.0.1 (2022-01-13)
 
 * Add: Ausgabe der Anzahl von Bewerbungen und Zusagen in der Turnierübersicht

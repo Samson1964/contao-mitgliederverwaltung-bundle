@@ -10,7 +10,8 @@ $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['date'] = array('Star
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['applications_legend'] = 'Bewerbungen';
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['name'] = array('Spieler', 'Name des Spielers');
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['applicationDate'] = array('Bewerbung am', 'Datum der Bewerbung');
-$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['promiseDate'] = array('Zusage am', 'Datum der Zusage');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['state'] = array('Status', 'Status der Zu- oder Absage');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['promiseDate'] = array('Datum', 'Datum der Zu- oder Absage');
 
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['publish_legend'] = 'Aktivieren';
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['published'] = array('Aktiv', 'Aktivieren oder deaktivieren Sie hier das Turnier');
@@ -37,4 +38,4 @@ $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['members'] = array('M
  */
 
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['bewerbungen'] = array('Bewerbungen', 'Anzahl der Bewerbungen');
-$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['zusagen'] = array('Zusagen', 'Anzahl der Zusagen');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['zusagen'] = array('Status', 'Anzahl der Zu- oder Absagen');

@@ -103,7 +103,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_applications'] = array
 	// Palettes
 	'palettes' => array
 	(
-		'default'                     => '{application_legend},tournament,applicationDate;{promise_legend},promiseDate,comment;{publish_legend},published'
+		'default'                     => '{application_legend},tournament,applicationDate;{promise_legend},state,promiseDate,comment;{publish_legend},published'
 	),
 
 	// Fields
@@ -154,6 +154,17 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_applications'] = array
 			),
 			'sql'                     => "int(10) unsigned NOT NULL default 0"
 		),
+		'state' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['state'],
+			'exclude'                 => true,
+			'inputType'               => 'radio',
+			'default'                 => 0,
+			'options'                 => array('0', '1', '2'),
+			'eval'                    => array('tl_class'=>'w50'),
+			'reference'               => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['state_options'],
+			'sql'                     => "varchar(1) NOT NULL default '0'"
+		),
 		'promiseDate' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['promiseDate'],
@@ -162,7 +173,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_applications'] = array
 			'sorting'                 => true,
 			'flag'                    => 6,
 			'inputType'               => 'text',
-			'eval'                    => array('rgxp'=>'date', 'mandatory'=>false, 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'eval'                    => array('rgxp'=>'date', 'mandatory'=>false, 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'clr w50 wizard'),
 			'load_callback' => array
 			(
 				array('tl_mitgliederverwaltung_applications', 'loadDate')
@@ -293,11 +304,18 @@ class tl_mitgliederverwaltung_applications extends Backend
 	 */
 	public function listTournaments($arrRow)
 	{
-		if($arrRow['promiseDate']) $temp = '<b style="color:green">'.$this->turniere[$arrRow['tournament']].'</b>';
+		// Status
+		if($arrRow['state'] == 0) $temp = '<b>'.$this->turniere[$arrRow['tournament']].'</b>';
+		elseif($arrRow['state'] == 1) $temp = '<b style="color:green">'.$this->turniere[$arrRow['tournament']].'</b>';
 		else $temp = '<b style="color:red">'.$this->turniere[$arrRow['tournament']].'</b>';
+		// Bewerbungsdatum
 		$temp .= ' - Bewerbung am: <b>'.date('d.m.Y', $arrRow['applicationDate']).'</b>';
-		if($arrRow['promiseDate']) $temp .= ' - Zusage am: <b>'.date('d.m.Y', $arrRow['promiseDate']).'</b>';
-		else $temp .= ' - noch keine Zusage';
+		// Status
+		if($arrRow['state'] == 0) $temp .= ' - ohne Entscheidung';
+		elseif($arrRow['state'] == 1) $temp .= ' - <span style="color:green">Zusage</span>';
+		else $temp .= ' - <span style="color:red">Absage</span>';
+		// Datum
+		if($arrRow['promiseDate']) $temp .= ' am <b>'.date('d.m.Y', $arrRow['promiseDate']).'</b>';
 		return $temp;
 	}
 

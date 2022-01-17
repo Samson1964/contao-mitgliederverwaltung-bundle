@@ -7,8 +7,9 @@ $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['application_legend'
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['tournament'] = array('Turnier', 'Wählen Sie das Turnier aus, für das sich der Spieler beworben hat.');
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['applicationDate'] = array('Bewerbungsdatum', 'Bewerbungsdatum im Format TT.MM.JJJJ');
 
-$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['promise_legend'] = 'Zusage';
-$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['promiseDate'] = array('Zusagedatum', 'Zusagedatum im Format TT.MM.JJJJ');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['promise_legend'] = 'Zu- oder Absage';
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['state'] = array('Status', 'Status der Zu- oder Absage');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['promiseDate'] = array('Datum', 'Zu- oder Absagedatum im Format TT.MM.JJJJ');
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['comment'] = array('Kommentar', 'Interner Kommentar');
 
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['publish_legend'] = 'Aktivieren';
@@ -30,3 +31,14 @@ $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['show'] = array('Bew
  */
 
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['members'] = array('Mitglieder', 'Mitglieder verwalten');
+
+/**
+ * Optionsfelder
+ */
+
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_applications']['state_options'] = array
+(
+	'0' => array('ohne Entscheidung', 'ohne Entscheidung'),
+	'1' => array('Zusage', 'Zusage'),
+	'2' => array('Absage', 'Absage'),
+);

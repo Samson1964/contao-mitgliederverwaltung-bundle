@@ -184,7 +184,8 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_tournaments'] = array
 class tl_mitgliederverwaltung_tournaments extends Backend
 {
 
-	var $bewerbungen_zusagen =array();
+	var $bewerbungen =array();
+	var $status =array();
 	
 	/**
 	 * Import the back end user object
@@ -201,8 +202,8 @@ class tl_mitgliederverwaltung_tournaments extends Backend
 		{
 			while($objRecord->next())
 			{
-				if($objRecord->applicationDate) $this->bewerbungen_zusagen[$objRecord->tournament][0]++; 
-				if($objRecord->promiseDate) $this->bewerbungen_zusagen[$objRecord->tournament][1]++; 
+				if($objRecord->applicationDate) $this->bewerbungen[$objRecord->tournament]++; 
+				$this->status[$objRecord->tournament][$objRecord->state]++; 
 			}
 		}
 
@@ -225,24 +226,30 @@ class tl_mitgliederverwaltung_tournaments extends Backend
 
 		$turnier_id = $dc->activeRecord->id;
 
-		$objApplications = $this->Database->prepare("SELECT m.id AS mitglied_id, m.nachname AS nachname, m.vorname AS vorname, a.id AS bewerbung_id, a.applicationDate AS bewerbungsdatum, a.promiseDate AS zusagedatum FROM tl_mitgliederverwaltung_applications AS a LEFT JOIN tl_mitgliederverwaltung AS m ON a.pid = m.id WHERE a.tournament=?")
+		$objApplications = $this->Database->prepare("SELECT m.id AS mitglied_id, m.nachname AS nachname, m.vorname AS vorname, a.id AS bewerbung_id, a.applicationDate AS bewerbungsdatum, a.state AS status, a.promiseDate AS zusagedatum FROM tl_mitgliederverwaltung_applications AS a LEFT JOIN tl_mitgliederverwaltung AS m ON a.pid = m.id WHERE a.tournament=?")
 		                                  ->execute($turnier_id);
 		$ausgabe = '<div class="long widget">'; // Wichtig damit das Auf- und Zuklappen funktioniert
 		$ausgabe .= '<table class="tl_listing showColumns">';
 		$ausgabe .= '<tbody><tr>';
 		$ausgabe .= '<th class="tl_folder_tlist">'.$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['name'][0].'</th>';
 		$ausgabe .= '<th class="tl_folder_tlist">'.$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['applicationDate'][0].'</th>';
+		$ausgabe .= '<th class="tl_folder_tlist">'.$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['state'][0].'</th>';
 		$ausgabe .= '<th class="tl_folder_tlist">'.$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['promiseDate'][0].'</th>';
 		$ausgabe .= '<th class="tl_folder_tlist tl_right_nowrap">&nbsp;</th>';
 		$ausgabe .= '</tr>';
 		$oddeven = 'odd';
 		while($objApplications->next())
 		{
+			// Farbmarkierung festlegen
+			if($objApplications->status == 0) $style = '';
+			elseif($objApplications->status == 1) $style = ' style="color:green"';
+			else $style = ' style="color:red"';
 			$oddeven = $oddeven == 'odd' ? 'even' : 'odd';
 			$ausgabe .= '<tr class="'.$oddeven.'" onmouseover="Theme.hoverRow(this,1)" onmouseout="Theme.hoverRow(this,0)">';
-			$ausgabe .= '<td class="tl_file_list">'.$objApplications->nachname.','.$objApplications->vorname.'</td>';
-			$ausgabe .= '<td class="tl_file_list">'.($objApplications->bewerbungsdatum ? date('d.m.Y', $objApplications->bewerbungsdatum) : '-').'</td>';
-			$ausgabe .= '<td class="tl_file_list">'.($objApplications->zusagedatum ? date('d.m.Y', $objApplications->zusagedatum) : '-').'</td>';
+			$ausgabe .= '<td class="tl_file_list"'.$style.'>'.$objApplications->nachname.','.$objApplications->vorname.'</td>';
+			$ausgabe .= '<td class="tl_file_list"'.$style.'>'.($objApplications->bewerbungsdatum ? date('d.m.Y', $objApplications->bewerbungsdatum) : '-').'</td>';
+			$ausgabe .= '<td class="tl_file_list"'.$style.'>'.($objApplications->status == 0 ? 'ohne Entscheidung' : ($objApplications->status == 1 ? 'Zusage' : 'Absage')).'</td>';
+			$ausgabe .= '<td class="tl_file_list"'.$style.'>'.($objApplications->zusagedatum ? date('d.m.Y', $objApplications->zusagedatum) : '-').'</td>';
 			$ausgabe .= '<td class="tl_file_list tl_right_nowrap">';
 			$ausgabe .= '<a href="'.$linkprefix.'?do=mitgliederverwaltung&amp;table=tl_mitgliederverwaltung_applications&amp;act=edit&amp;id='.$objApplications->bewerbung_id.'&amp;popup=1&amp;rt='.REQUEST_TOKEN.'" onclick="Backend.openModalIframe({\'width\':768,\'title\':\'Eintrag in Bewerbungen bearbeiten\',\'url\':this.href});return false">'.$imageEdit.'</a>';
 			$ausgabe .= '</td>';
@@ -341,8 +348,10 @@ class tl_mitgliederverwaltung_tournaments extends Backend
 	public function viewLabels($row, $label, Contao\DataContainer $dc, $args)
 	{
 
-		$args[2] = $this->bewerbungen_zusagen[$row['id']][0];
-		$args[3] = $this->bewerbungen_zusagen[$row['id']][1];
+		$args[2] = $this->bewerbungen[$row['id']];
+		$args[3] = 'Unklar:'.$this->status[$row['id']][0];
+		if($this->status[$row['id']][1]) $args[3] .= ' Zusage:'.$this->status[$row['id']][1];
+		if($this->status[$row['id']][2]) $args[3] .= ' Absage:'.$this->status[$row['id']][2];
 
 		// Datensatz komplett zurückgeben
 		return $args;
