@@ -1,5 +1,9 @@
 <?php
 
+$GLOBALS['TL_LANG']['CTE']['correspondence_chess'] = 'Fernschach-Elemente';
+$GLOBALS['TL_LANG']['CTE']['mitgliederverwaltung_zusagen'] = array('Turnierzusagen anzeigen', 'Teilnehmer mit Zusagen für ein Turnier anzeigen.');
+
+
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_import']['headline'] = 'Mitgliederdaten aus einer CSV-Datei importieren';
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung_import']['format'] = 
 'Die hochgeladenen CSV-Dateien müssen im UTF-8-Format vorliegen. Je Zeile steht ein Datensatz in der Datei. 

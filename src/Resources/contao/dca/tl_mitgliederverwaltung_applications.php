@@ -185,7 +185,10 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_applications'] = array
 			'exclude'                 => true,
 			'search'                  => true,
 			'inputType'               => 'textarea',
-			'eval'                    => array('tl_class'=>'w50', 'rows'=>5),
+			'eval'                    => array
+			(
+				'tl_class'            => 'w50 noresize',
+			),
 			'sql'                     => "text NULL"
 		),
 		'published' => array

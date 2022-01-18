@@ -18,5 +18,5 @@ $GLOBALS['FE_MOD']['mitgliederverwaltung'] = array
 /**
  * Inhaltselemente
  */
- 
-//$GLOBALS['TL_CTE']['includes']['adressen'] = 'Schachbulle\ContaoAdressenBundle\ContentElements\Adresse';
+
+$GLOBALS['TL_CTE']['correspondence_chess']['mitgliederverwaltung_zusagen'] = 'Schachbulle\ContaoMitgliederverwaltungBundle\ContentElements\Zusagen';

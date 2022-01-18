@@ -1,5 +1,10 @@
 # Mitgliederverwaltung Changelog
 
+## Version 1.0.3 (2022-01-18)
+
+* Change: tl_mitgliederverwaltung_applications.comment - CSS-Klasse noresize hinzugefügt
+* Add: Inhaltselement für Ausgabe der zugesagten Spieler eines Turniers
+
 ## Version 1.0.2 (2022-01-17)
 
 * Add: tl_mitgliederverwaltung_applications.state = Optionsfeld: zugesagt, abgesagt, unklar
