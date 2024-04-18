@@ -26,15 +26,15 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_tournaments'] = array
 	(
 		'sorting' => array
 		(
-			'mode'                    => 2,
-			'fields'                  => array('date'),
+			'mode'                    => 1,
+			'fields'                  => array('startDate'),
 			'flag'                    => 11,
 			'panelLayout'             => 'filter;sort,search,limit',
 		),
 		'label' => array
 		(
 			// Das Feld aktiv wird vom label_callback überschrieben
-			'fields'                  => array('titel', 'date', 'bewerbungen', 'zusagen'),
+			'fields'                  => array('titel', 'startDate', 'bewerbungen', 'zusagen'),
 			'showColumns'             => true,
 			'format'                  => '%s',
 			'label_callback'          => array('tl_mitgliederverwaltung_tournaments', 'viewLabels'),
@@ -47,6 +47,12 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_tournaments'] = array
 				'href'                => 'table=tl_mitgliederverwaltung',
 				'icon'                => 'bundles/contaomitgliederverwaltung/images/members.png',
 				'attributes'          => 'onclick="Backend.getScrollOffset();"'
+			),
+			'import' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['import'],
+				'href'                => 'key=importTournaments',
+				'icon'                => 'bundles/contaomitgliederverwaltung/images/import.png'
 			),
 			'all' => array
 			(
@@ -79,10 +85,17 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_tournaments'] = array
 			),
 			'toggle' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['toggle'],
-				'icon'                => 'visible.gif',
-				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
-				'button_callback'     => array('tl_mitgliederverwaltung_tournaments', 'toggleIcon')
+				'label'                => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['toggle'],
+				'attributes'           => 'onclick="Backend.getScrollOffset()"',
+				'haste_ajax_operation' => array
+				(
+					'field'            => 'published',
+					'options'          => array
+					(
+						array('value' => '', 'icon' => 'invisible.svg'),
+						array('value' => '1', 'icon' => 'visible.svg'),
+					),
+				),
 			),
 			'show' => array
 			(
@@ -97,7 +110,7 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_tournaments'] = array
 	// Paletten
 	'palettes' => array
 	(
-		'default'                     => '{tournament_legend},titel,date;{applications_legend},applications;{publish_legend},published'
+		'default'                     => '{tournament_legend},titel,kennziffer,registrationDate,startDate,art,nenngeld;{turnierleiter_legend},turnierleiterName,turnierleiterEmail;{applications_legend},applications;{publish_legend},published'
 	),
 
 	// Felder
@@ -131,9 +144,26 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_tournaments'] = array
 			),
 			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
-		'date' => array
+		'kennziffer' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['date'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['kennziffer'],
+			'inputType'               => 'text',
+			'exclude'                 => true,
+			'filter'                  => true,
+			'sorting'                 => true,
+			'search'                  => true,
+			'flag'                    => 1,
+			'eval'                    => array
+			(
+				'mandatory'           => false, 
+				'maxlength'           => 255, 
+				'tl_class'            => 'w50'
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'registrationDate' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['registrationDate'],
 			'default'                 => time(),
 			'exclude'                 => true,
 			'filter'                  => true,
@@ -146,6 +176,73 @@ $GLOBALS['TL_DCA']['tl_mitgliederverwaltung_tournaments'] = array
 				array('tl_mitgliederverwaltung_tournaments', 'loadDate')
 			),
 			'sql'                     => "int(10) unsigned NOT NULL default 0"
+		),
+		'startDate' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['startDate'],
+			'default'                 => time(),
+			'exclude'                 => true,
+			'filter'                  => true,
+			'sorting'                 => true,
+			'flag'                    => 6,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'date', 'mandatory'=>false, 'doNotCopy'=>true, 'datepicker'=>true, 'tl_class'=>'w50 wizard'),
+			'load_callback' => array
+			(
+				array('tl_mitgliederverwaltung_tournaments', 'loadDate')
+			),
+			'sql'                     => "int(10) unsigned NOT NULL default 0"
+		),
+		'art' => array(
+			'label'                 => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['art'],
+			'exclude'               => true,
+			'inputType'             => 'radio',
+			'options'               => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['art_options'],
+			'eval'                  => array('tl_class'=>'w50', 'includeBlankOption'=>false),
+			'sql'                   => "varchar(1) NOT NULL default ''"
+		),
+		'nenngeld' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['nenngeld'],
+			'exclude'                 => true,
+			'filter'                  => true,
+			'sorting'                 => true,
+			'inputType'               => 'text',
+			'eval'                    => array('rgxp'=>'digit', 'mandatory'=>false, 'tl_class'=>'w50', 'maxlength'=>6),
+			'sql'                     => "varchar(6) NOT NULL default ''"
+		),
+		'turnierleiterName' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['turnierleiterName'],
+			'inputType'               => 'text',
+			'exclude'                 => true,
+			'filter'                  => true,
+			'sorting'                 => true,
+			'search'                  => true,
+			'flag'                    => 1,
+			'eval'                    => array
+			(
+				'mandatory'           => false, 
+				'maxlength'           => 255, 
+				'tl_class'            => 'w50'
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+		'turnierleiterEmail' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_mitgliederverwaltung_tournaments']['turnierleiterEmail'],
+			'exclude'                 => true,
+			'search'                  => true,
+			'inputType'               => 'text',
+			'eval'                    => array
+			(
+				'mandatory'           => false,
+				'maxlength'           => 255, 
+				'rgxp'                => 'email', 
+				'decodeEntities'      => true, 
+				'tl_class'            => 'w50'
+			),
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		// Gibt die Liste der Bewerbungen aus
 		'applications' => array
@@ -261,68 +358,6 @@ class tl_mitgliederverwaltung_tournaments extends Backend
 
 	}
 
-	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
-	{
-		$this->import('BackendUser', 'User');
-
-		if (strlen($this->Input->get('tid')))
-		{
-			$this->toggleVisibility($this->Input->get('tid'), ($this->Input->get('state') == 0));
-			$this->redirect($this->getReferer());
-		}
-
-		// Check permissions AFTER checking the tid, so hacking attempts are logged
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_mitgliederverwaltung_tournaments::published', 'alexf'))
-		{
-			return '';
-		}
-
-		$href .= '&amp;id='.$this->Input->get('id').'&amp;tid='.$row['id'].'&amp;state='.$row[''];
-
-		if (!$row['published'])
-		{
-			$icon = 'invisible.gif';
-		}
-
-		return '<a href="'.$this->addToUrl($href).'" title="'.specialchars($title).'"'.$attributes.'>'.$this->generateImage($icon, $label).'</a> ';
-	}
-
-	public function toggleVisibility($intId, $blnPublished)
-	{
-		// Check permissions to publish
-		if (!$this->User->isAdmin && !$this->User->hasAccess('tl_mitgliederverwaltung_tournaments::published', 'alexf'))
-		{
-			$this->log('Kein Zugriffsrecht für Aktivierung Datensatz ID "'.$intId.'"', 'tl_mitgliederverwaltung_tournaments toggleVisibility', TL_ERROR);
-			// Zurücklink generieren, ab C4 ist das ein symbolischer Link zu "contao"
-			if (version_compare(VERSION, '4.0', '>='))
-			{
-				$backlink = \System::getContainer()->get('router')->generate('contao_backend');
-			}
-			else
-			{
-				$backlink = 'contao/main.php';
-			}
-			$this->redirect($backlink.'?act=error');
-		}
-		
-		$this->createInitialVersion('tl_mitgliederverwaltung_tournaments', $intId);
-		
-		// Trigger the save_callback
-		if (is_array($GLOBALS['TL_DCA']['tl_mitgliederverwaltung_tournaments']['fields']['published']['save_callback']))
-		{
-			foreach ($GLOBALS['TL_DCA']['tl_mitgliederverwaltung_tournaments']['fields']['published']['save_callback'] as $callback)
-			{
-				$this->import($callback[0]);
-				$blnPublished = $this->$callback[0]->$callback[1]($blnPublished, $this);
-			}
-		}
-		
-		// Update the database
-		$this->Database->prepare("UPDATE tl_mitgliederverwaltung_tournaments SET tstamp=". time() .", published='" . ($blnPublished ? '' : '1') . "' WHERE id=?")
-		               ->execute($intId);
-		$this->createNewVersion('tl_mitgliederverwaltung_tournaments', $intId);
-	}
-
 	/**
 	 * Set the timestamp to 00:00:00 (see #26)
 	 *
@@ -332,7 +367,8 @@ class tl_mitgliederverwaltung_tournaments extends Backend
 	 */
 	public function loadDate($value)
 	{
-		return strtotime(date('Y-m-d', $value) . ' 00:00:00');
+		if($value) return strtotime(date('Y-m-d', $value) . ' 00:00:00');
+		else return '';
 	}
 
 	/**

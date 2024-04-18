@@ -120,6 +120,7 @@ $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['toggle'] = array('Mitglied aktiv
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['show'] = array('Mitgliedsdetails anzeigen', 'Details des Mitglieds %s anzeigen');
 
 $GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['applications'] = array('Turniere bearbeiten', 'Bewerbungen und Zusagen für Turniere des Mitglieds %s bearbeiten');
+$GLOBALS['TL_LANG']['tl_mitgliederverwaltung']['konto'] = array('Buchungskonto bearbeiten', 'Buchungen (Zahlungsein- und ausgänge) des Mitglieds %s bearbeiten');
 
 /**
  * Buttons für globale Operationen

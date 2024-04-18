@@ -1,9 +1,11 @@
 <?php
 
 $GLOBALS['BE_MOD']['accounts']['mitgliederverwaltung'] = array(
-	'tables'         => array('tl_mitgliederverwaltung', 'tl_mitgliederverwaltung_applications', 'tl_mitgliederverwaltung_tournaments'),
-	'icon'           => 'bundles/contaomitgliederverwaltung/images/members.png',
-	'import'         => array('Schachbulle\ContaoMitgliederverwaltungBundle\Classes\Import', 'run'),
+	'tables'            => array('tl_mitgliederverwaltung', 'tl_mitgliederverwaltung_applications', 'tl_mitgliederverwaltung_tournaments', 'tl_mitgliederverwaltung_konto'),
+	'icon'              => 'bundles/contaomitgliederverwaltung/images/members.png',
+	'import'            => array('Schachbulle\ContaoMitgliederverwaltungBundle\Classes\Import', 'run'),
+	'importTournaments' => array('Schachbulle\ContaoMitgliederverwaltungBundle\Classes\ImportTournaments', 'run'),
+	'importBuchungen'   => array('Schachbulle\ContaoMitgliederverwaltungBundle\Classes\ImportBuchungen', 'run'),
 );
 
 /**

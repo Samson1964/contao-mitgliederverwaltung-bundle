@@ -1,5 +1,15 @@
 # Mitgliederverwaltung Changelog
 
+## Version 1.1.0 (2024-04-18)
+
+* Add: tl_mitgliederverwaltung_konto für die Erfassung von Beiträgen, Nenngeldern u.ä., also ein Buchungskonto
+* Add: Importfunktion für Turniere nach tl_mitgliederverwaltung_tournaments
+* Add: Importfunktion für Buchungen nach tl_mitgliederverwaltung_konto
+* Add: Verknüpfung einer Buchung mit einem Turnier
+* Add: codefog/contao-haste
+* Change: Haste-Toggler statt des normalen Togglers
+* Add: Kompatibilität PHP 8
+
 ## Version 1.0.3 (2022-01-18)
 
 * Change: tl_mitgliederverwaltung_applications.comment - CSS-Klasse noresize hinzugefügt
